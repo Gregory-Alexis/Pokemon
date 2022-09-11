@@ -6,8 +6,8 @@ import { Pokemon } from "../pokemons";
 @Component({
   selector: "app-edit-pokemon",
   template: `
-    <h2>Editer {{ pokemon?.name }}</h2>
-    <p *ngIf="pokemon" class="enter">
+    <h2 class="center">Editer {{ pokemon?.name }}</h2>
+    <p *ngIf="pokemon" class="center">
       <img [src]="pokemon.picture" />
     </p>
     <app-pokemon-form *ngIf="pokemon" [pokemon]="pokemon"></app-pokemon-form>
