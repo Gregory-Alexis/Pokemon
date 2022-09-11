@@ -9,12 +9,12 @@ import { Pokemon } from "../pokemons";
 })
 export class PokemonFormComponent implements OnInit {
   @Input() pokemon: Pokemon;
-  type: string[];
+  types: string[];
 
   constructor(private pokemonService: PokemonService, private router: Router) {}
 
   ngOnInit() {
-    this.type = this.pokemonService.getPokemonTypeList();
+    this.types = this.pokemonService.getPokemonTypeList();
   }
 
   hasType(type: string): boolean {
@@ -30,6 +30,18 @@ export class PokemonFormComponent implements OnInit {
       const index = this.pokemon.types.indexOf(type);
       this.pokemon.types.splice(index, 1);
     }
+  }
+
+  isTypesValid(type: string): boolean {
+    if (this.pokemon.types.length === 1 && this.hasType(type)) {
+      return false;
+    }
+
+    if (this.pokemon.types.length > 2 && !this.hasType(type)) {
+      return false;
+    }
+
+    return true;
   }
 
   onSubmit() {
