@@ -1,11 +1,21 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { catchError, Observable, of, tap } from "rxjs";
 import { POKEMONS } from "./pokemon/mock-pokemon-list";
 import { Pokemon } from "./pokemon/pokemons";
 
 @Injectable()
 export class PokemonService {
-  getPokemonList(): Pokemon[] {
-    return POKEMONS;
+  constructor(private http: HttpClient) {}
+
+  getPokemonList(): Observable<Pokemon[]> {
+    return this.http.get<Pokemon[]>("api/pokemons").pipe(
+      tap((res) => console.table(res)),
+      catchError((error) => {
+        console.log(error);
+        return of([]);
+      })
+    );
   }
 
   getPokemonById(pokemonId: number): Pokemon | undefined {
