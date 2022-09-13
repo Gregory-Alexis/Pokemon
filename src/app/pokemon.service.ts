@@ -32,6 +32,13 @@ export class PokemonService {
     );
   }
 
+  deletePokemonById(pokemonId: number): Observable<null> {
+    return this.http.delete(`api/pokemon/${pokemonId}`).pipe(
+      tap((res) => this.log(res)),
+      catchError((error) => this.handleError(error, null))
+    );
+  }
+
   private log(res: Pokemon[] | Pokemon | undefined | Object) {
     console.table(res);
   }
