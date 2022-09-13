@@ -1,20 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { Pokemon } from "../pokemons";
 
 @Component({
-  selector: 'app-add-pokemon',
+  selector: "app-add-pokemon",
   template: `
-    <p>
-      add-pokemon works!
-    </p>
+    <h2 class="center">Ajouter un pokémon</h2>
+    <app-pokemon-form [pokemon]="pokemon"></app-pokemon-form>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class AddPokemonComponent implements OnInit {
+  pokemon: Pokemon;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit() {
+    this.pokemon = new Pokemon();
   }
-
 }
