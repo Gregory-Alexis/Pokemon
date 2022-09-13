@@ -21,14 +21,14 @@ export class PokemonService {
     );
   }
 
-  updatePokemon(pokemon: Pokemon): Observable<Pokemon | undefined> {
+  updatePokemon(pokemon: Pokemon): Observable<null> {
     const httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" }),
     };
 
     return this.http.put("api/pokemon", pokemon, httpOptions).pipe(
       tap((res) => this.log(res)),
-      catchError((error) => this.handleError(error, undefined))
+      catchError((error) => this.handleError(error, null))
     );
   }
 
